@@ -17,7 +17,7 @@ class PlacesList extends StatelessWidget {
         child: Text(
           "No Locations added yet",
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: Theme.of(context).colorScheme.onSecondary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
         ),
       );

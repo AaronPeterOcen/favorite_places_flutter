@@ -1,0 +1,37 @@
+import 'package:favorite_places/models/place.dart';
+// import 'package:favorite_places/screens/places.dart';
+import 'package:flutter/material.dart';
+
+// will be a widget that is used in the places.dart screen
+
+class PlacesList extends StatelessWidget {
+  PlacesList({super.key, required this.places});
+
+  List<Place> places;
+
+  @override
+  Widget build(BuildContext context) {
+    if (places.isEmpty) {
+      return Center(
+        child: Text(
+          "No Locations added yet",
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+        ),
+      );
+    }
+    return ListView.builder(
+      itemCount: places.length,
+      itemBuilder: (context, index) => ListTile(
+        title: Text(
+          places[index].title,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+        ),
+      ),
+    );
+  }
+}
+// FlutterError

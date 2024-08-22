@@ -1,31 +1,15 @@
-import 'package:favorite_places/screens/add_item_screen.dart';
+import 'package:favorite_places/screens/add_places.dart';
+import 'package:favorite_places/widgets/places_list.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class PlacesScreen extends StatelessWidget {
+  const PlacesScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   // void _addPlaces() async {
-  //   final newLocale = await Navigator.of(context).push(
-  //     MaterialPageRoute(
-  //       builder: (context) => AddItemScreen(),
-  //     ),
-  //    if (_ == null) {
-  //     return;
-  //   }
-  //   );
-
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
         title: const Text('Favorite locales'),
         backgroundColor: const Color.fromARGB(255, 8, 87, 107),
         actions: [
@@ -40,7 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
+      body: PlacesList(places: []),
     );
   }
 }
+
 // FlutterError

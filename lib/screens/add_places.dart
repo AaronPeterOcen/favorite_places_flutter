@@ -6,19 +6,12 @@ class AddItemScreen extends StatefulWidget {
 }
 
 class _AddItemScreenState extends State<AddItemScreen> {
-  final GlobalKey<FormState> _formKey =
-      GlobalKey<FormState>(); // A key for managing the form
-  String _location = ''; // Variable to store the entered location
+  final _titleController = TextEditingController();
 
-  void _submitForm() {
-    // Check if the form is valid
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save(); // Save the form data
-      // You can perform actions with the form data here and extract the details
-      print('Name: $_location'); // Print the name
-      // print('Email: $_email'); // Print the email
-      Navigator.pop(context);
-    }
+  @override
+  void dispose() {
+    _titleController.dispose();
+    super.dispose();
   }
 
   @override
@@ -27,32 +20,25 @@ class _AddItemScreenState extends State<AddItemScreen> {
       appBar: AppBar(
         title: Text('Add locale'),
       ),
-      body: Form(
-        key: _formKey, // Associate the form key with this Form widget
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(12),
           child: Column(
-            children: <Widget>[
-              TextFormField(
+            children: [
+              TextField(
                 decoration: InputDecoration(
-                    labelText: 'title'), // Label for the name field
-                validator: (value) {
-                  // Validation function for the name field
-                  if (value!.isEmpty) {
-                    return 'Please enter a valid place.'; // Return an error message if the name is empty
-                  }
-                  return null; // Return null if the name is valid
-                },
-                onSaved: (value) {
-                  _location = value!; // Save the entered name
-                },
+                  labelText: 'title',
+                ), // Label for the name field
+                controller: _titleController,
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.secondary),
               ),
               SizedBox(height: 20.0),
-              ElevatedButton(
-                // icon: Icons.add_rounded,
+              ElevatedButton.icon(
+                icon: Icon(Icons.add_rounded),
                 onPressed:
-                    _submitForm, // Call the _submitForm function when the button is pressed
-                child: Text('Submit'), // Text on the button
+                    () {}, // Call the _submitForm function when the button is pressed
+                label: Text('Submit'), // Text on the button
               ),
             ],
           ),

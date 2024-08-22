@@ -28,9 +28,8 @@ class PlacesList extends StatelessWidget {
           places[index]
               .title, // Accessing the title of the place at the current index
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSecondary, // Custom text color
+                color:
+                    Theme.of(context).colorScheme.tertiary, // Custom text color
               ),
         ),
       ),

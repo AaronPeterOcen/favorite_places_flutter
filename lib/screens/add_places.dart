@@ -1,12 +1,33 @@
+import 'package:favorite_places/providers/user_place_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddItemScreen extends StatefulWidget {
+class AddItemScreen extends ConsumerStatefulWidget {
+  // to get access to riverpod and the providers we use the Consumer state widget
   @override
   _AddItemScreenState createState() => _AddItemScreenState();
 }
 
-class _AddItemScreenState extends State<AddItemScreen> {
+class _AddItemScreenState extends ConsumerState<AddItemScreen> {
   final _titleController = TextEditingController();
+
+// will be used to save the input from the user
+  void _savePlace() {
+    // Retrieve the text entered in the input field
+    final enteredText = _titleController.text;
+
+    // Check if the text is empty; if it is, return early to avoid adding an empty place
+    if (enteredText.isEmpty) {
+      return;
+    }
+
+    // Add the place using the notifier exposed by userPlacesProvider
+    // This updates the state managed by UserPlacesNotifier
+    ref.read(userPlacesProvider.notifier).addPlace(enteredText);
+
+    // Navigate back to the previous screen after saving the place
+    Navigator.of(context).pop();
+  }
 
   @override
   void dispose() {
@@ -37,7 +58,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
               ElevatedButton.icon(
                 icon: Icon(Icons.add_rounded),
                 onPressed:
-                    () {}, // Call the _submitForm function when the button is pressed
+                    _savePlace, // Call the _submitForm function when the button is pressed
                 label: Text('Submit'), // Text on the button
               ),
             ],

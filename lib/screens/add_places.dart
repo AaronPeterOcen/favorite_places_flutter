@@ -74,6 +74,7 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
               ),
               SizedBox(height: 20.0),
               LocationInput(
+                // error source
                 onSelectLocation: (location) {
                   _selectedLocation = location;
                 },

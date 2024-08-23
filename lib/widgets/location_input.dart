@@ -27,7 +27,8 @@ class _LocationInputState extends State<LocationInput> {
     final lat = pickedLocation!.latitude;
     final long = pickedLocation!.longitude;
 
-    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$long=&zoom=11&size=640x640&scale=2&maptype=terrain&key=AIzaSyAB02kJAA_uRSYZ823KxsKM3B1yQemFj4s';
+    // return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$long=&zoom=11&size=640x640&scale=2&maptype=terrain&key=AIzaSyAB02kJAA_uRSYZ823KxsKM3B1yQemFj4s';
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$long=&zoom=11&size=640x640&scale=2&maptype=terrain&key=YOURAPIKEy';
   }
 
 // Method to get the user's current location
@@ -78,7 +79,8 @@ class _LocationInputState extends State<LocationInput> {
     }
 
     final url = Uri.parse(
-      'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat, $long&key=AIzaSyAB02kJAA_uRSYZ823KxsKM3B1yQemFj4s',
+      // 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat, $long&key=AIzaSyAB02kJAA_uRSYZ823KxsKM3B1yQemFj4s',
+      'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat, $long&key=YOURAPIKEY',
     );
     final response = await http.get(url);
     final resp = jsonDecode(response.body);
@@ -86,10 +88,14 @@ class _LocationInputState extends State<LocationInput> {
 
     // Update the state with the retrieved location data
     setState(() {
-      pickedLocation =
-          PlaceLocation(latitude: lat, longitude: long, address: address);
+      pickedLocation = PlaceLocation(
+        latitude: lat,
+        longitude: long,
+        address: address,
+      );
       _isGettingLocation = false; // Stop the loading indicator
     });
+    widget.onSelectLocation(pickedLocation!);
   }
 
   @override
@@ -115,8 +121,6 @@ class _LocationInputState extends State<LocationInput> {
         height: double.infinity,
       );
     }
-
-    widget.onSelectLocation(pickedLocation!);
 
     return Column(
       children: [

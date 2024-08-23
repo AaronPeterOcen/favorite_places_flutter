@@ -9,6 +9,14 @@ class PlacesDetailsScreen extends StatelessWidget {
 
   final Place place;
 
+  String get locationImage {
+    final lat = place.location.latitude;
+    final long = place.location.longitude;
+
+    // return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$long=&zoom=11&size=640x640&scale=2&maptype=terrain&key=AIzaSyAB02kJAA_uRSYZ823KxsKM3B1yQemFj4s';
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$long=&zoom=11&size=640x640&scale=2&maptype=terrain&key=YOURAPIKEy';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +30,40 @@ class PlacesDetailsScreen extends StatelessWidget {
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(locationImage),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.all(13),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    colors: [
+                      Colors.transparent,
+                      Colors.blueAccent,
+                    ],
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topCenter,
+                  )),
+                  child: Text(
+                    place.location.address,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .tertiary, // Custom text color
+                        ),
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),

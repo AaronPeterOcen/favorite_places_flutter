@@ -64,6 +64,7 @@ class _ImageInputState extends State<ImageInput> {
 
     // Return a container that either displays the image or the button
     return Container(
+      // padding: EdgeInsets.all(30),
       decoration: BoxDecoration(
         border: Border.all(
           width: 1,

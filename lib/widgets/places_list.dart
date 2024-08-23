@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 // will be a widget that is used in the places.dart screen
 
+// ignore: must_be_immutable
 class PlacesList extends StatelessWidget {
   PlacesList({super.key, required this.places});
 
@@ -25,6 +26,10 @@ class PlacesList extends StatelessWidget {
     return ListView.builder(
       itemCount: places.length, // Number of items in the list
       itemBuilder: (context, index) => ListTile(
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundImage: FileImage(places[index].image),
+        ),
         title: Text(
           places[index]
               .title, // Accessing the title of the place at the current index

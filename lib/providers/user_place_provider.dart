@@ -10,8 +10,8 @@ class UserPlacesNotifier extends StateNotifier<List<Place>> {
   UserPlacesNotifier() : super(const []);
 
   // Method to add a new place to the state
-  void addPlace(String title, File image) {
-    final newPlace = Place(title: title, image: image);
+  void addPlace(String title, File image, PlaceLocation location) {
+    final newPlace = Place(title: title, image: image, location: location);
     state = [...state, newPlace]; // Add the new place to the existing list
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/providers/user_place_provider.dart';
 import 'package:favorite_places/widgets/image_input.dart';
 import 'package:favorite_places/widgets/location_input.dart';
@@ -16,13 +17,17 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
   final _titleController = TextEditingController();
   File? _selectedImage;
 
+  PlaceLocation? _selectedLocation;
+
 // will be used to save the input from the user
   void _savePlace() {
     // Retrieve the text entered in the input field
     final enteredText = _titleController.text;
 
     // Check if the text is empty; if it is, return early to avoid adding an empty place
-    if (enteredText.isEmpty || _selectedImage == null) {
+    if (enteredText.isEmpty ||
+        _selectedImage == null ||
+        _selectedLocation == null) {
       return;
     }
 
@@ -30,7 +35,7 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
     // This updates the state managed by UserPlacesNotifier
     ref
         .read(userPlacesProvider.notifier)
-        .addPlace(enteredText, _selectedImage!);
+        .addPlace(enteredText, _selectedImage!, _selectedLocation!);
 
     // Navigate back to the previous screen after saving the place
     Navigator.of(context).pop();
@@ -68,7 +73,11 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
                 },
               ),
               SizedBox(height: 20.0),
-              LocationInput(),
+              LocationInput(
+                onSelectLocation: (location) {
+                  _selectedLocation = location;
+                },
+              ),
               SizedBox(height: 20.0),
               ElevatedButton.icon(
                 icon: Icon(Icons.add_rounded),

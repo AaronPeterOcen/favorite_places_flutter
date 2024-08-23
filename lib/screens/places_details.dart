@@ -13,6 +13,7 @@ class PlacesDetailsScreen extends StatelessWidget {
     final lat = place.location.latitude;
     final long = place.location.longitude;
 
+    // No API Key To be added so the app will not work as intended
     // return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$long=&zoom=11&size=640x640&scale=2&maptype=terrain&key=AIzaSyAB02kJAA_uRSYZ823KxsKM3B1yQemFj4s';
     return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$long=&zoom=11&size=640x640&scale=2&maptype=terrain&key=YOURAPIKEy';
   }

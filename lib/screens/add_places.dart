@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:favorite_places/providers/user_place_provider.dart';
 import 'package:favorite_places/widgets/image_input.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ class AddItemScreen extends ConsumerStatefulWidget {
 
 class _AddItemScreenState extends ConsumerState<AddItemScreen> {
   final _titleController = TextEditingController();
+  File? _selectedImage;
 
 // will be used to save the input from the user
   void _savePlace() {
@@ -18,13 +21,15 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
     final enteredText = _titleController.text;
 
     // Check if the text is empty; if it is, return early to avoid adding an empty place
-    if (enteredText.isEmpty) {
+    if (enteredText.isEmpty || _selectedImage == null) {
       return;
     }
 
     // Add the place using the notifier exposed by userPlacesProvider
     // This updates the state managed by UserPlacesNotifier
-    ref.read(userPlacesProvider.notifier).addPlace(enteredText);
+    ref
+        .read(userPlacesProvider.notifier)
+        .addPlace(enteredText, _selectedImage!);
 
     // Navigate back to the previous screen after saving the place
     Navigator.of(context).pop();
@@ -56,7 +61,11 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
                     TextStyle(color: Theme.of(context).colorScheme.secondary),
               ),
               SizedBox(height: 10.0),
-              ImageInput(),
+              ImageInput(
+                onSelectImage: (image) {
+                  _selectedImage = image;
+                },
+              ),
               SizedBox(height: 20.0),
               ElevatedButton.icon(
                 icon: Icon(Icons.add_rounded),

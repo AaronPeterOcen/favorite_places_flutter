@@ -7,7 +7,9 @@ import 'package:image_picker/image_picker.dart'; // Import to access the ImagePi
 
 // ImageInput widget: Allows the user to take a photo using the camera
 class ImageInput extends StatefulWidget {
-  const ImageInput({super.key});
+  const ImageInput({super.key, required this.onSelectImage});
+
+  final void Function(File image) onSelectImage;
 
   @override
   State<ImageInput> createState() => _ImageInputState();
@@ -34,6 +36,8 @@ class _ImageInputState extends State<ImageInput> {
     setState(() {
       _selectedImage = File(pickedImage.path);
     });
+
+    widget.onSelectImage(_selectedImage!);
   }
 
   @override

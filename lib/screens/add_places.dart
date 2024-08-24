@@ -73,12 +73,12 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
                 },
               ),
               SizedBox(height: 20.0),
-              LocationInput(
-                // error source
-                onSelectLocation: (location) {
-                  _selectedLocation = location;
-                },
-              ),
+              // LocationInput(
+              //   // error source
+              //   onSelectLocation: (location) {
+              //     _selectedLocation = location;
+              //   },
+              // ),
               SizedBox(height: 20.0),
               ElevatedButton.icon(
                 icon: Icon(Icons.add_rounded),
